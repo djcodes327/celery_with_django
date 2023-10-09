@@ -1,4 +1,5 @@
 ## Commands Used in this Project
+
 #### Start the Celery
 
 Celery -A app_name(App Name).celery worker -l (log) info (Log Level)
@@ -8,6 +9,25 @@ Celery -A app_name(App Name).celery worker -l (log) info (Log Level)
 To Start Celery Beat
 
 `celery -A celery_with_django beat -l info`
+
+`--pool` decides who will perform the tasks i.e. threads,process,worker,etc
+
+`--concurrency` will decide the size of pool. Note max = Number of Cores in system
+
+`--autoscale` you can specify this for auto-scaling the pool size min and max values can be set here to manage load of pool.
+
+```python
+# Example Below
+
+celery -A celery_with_django.celery worker --pool=solo --concurrency=5 --autoscale=10,3 -l info
+```
+
+#### Execution Pool can have below different options
+1. Pre-fork (Multi-processing) [default]
+2. Solo
+3. Threads (Multi-threading)
+4. eventlet
+5. gevent
 
 **Basic Setup Below**
 
